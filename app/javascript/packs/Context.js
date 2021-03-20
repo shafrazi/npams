@@ -9,10 +9,10 @@ function NpaContextProvider(props) {
   useEffect(() => {
     fetch("/api/customers")
       .then((response) => {
+        console.log(response);
         return response.json();
       })
       .then((response) => {
-        console.log(response);
         setCustomers(response.data);
         setIsCustomersLoaded(true);
       });
