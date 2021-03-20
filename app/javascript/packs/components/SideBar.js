@@ -9,6 +9,16 @@ import {
 } from "@material-ui/core";
 import { mainListItems, secondaryListItems } from "./listItems";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+
+import { NpaContext } from "../Context";
+
+const iconStyles = {
+  color: "white",
+};
 
 const drawerWidth = 240;
 
@@ -51,6 +61,7 @@ const useStyles = makeStyles((theme) => {
 
 function SideBar(props) {
   const classes = useStyles();
+  const { handleSignOut } = React.useContext(NpaContext);
   const { open, handleDrawerClose } = props;
   return (
     <Drawer
@@ -67,6 +78,14 @@ function SideBar(props) {
       </div>
       <Divider />
       <List>{mainListItems}</List>
+      <List>
+        <ListItem button onClick={handleSignOut}>
+          <ListItemIcon style={iconStyles}>
+            <ExitToAppIcon />
+          </ListItemIcon>
+          <ListItemText primary="Sign Out" />
+        </ListItem>
+      </List>
       <Divider style={{ color: "white" }} />
       <List>{secondaryListItems}</List>
     </Drawer>

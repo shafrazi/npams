@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import clsx from "clsx";
 import { Switch, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,9 +11,11 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 
+import { NpaContext } from "./Context";
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import Customers from "./components/Customers";
+import Login from "./components/Login";
 
 function Copyright() {
   return (
@@ -111,6 +113,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function App() {
+  const { isUserSignedIn, currentUser } = useContext(NpaContext);
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -120,6 +123,10 @@ export default function App() {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  if (!isUserSignedIn) {
+    return <Login />;
+  }
 
   return (
     <div className={classes.root}>

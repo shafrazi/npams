@@ -7,8 +7,8 @@ class Api::CustomersController < ApplicationController
     if user_signed_in?
       render json: CustomerSerializer.new(@customers).serializable_hash
     else
-      # render json: {status: 401}
-      redirect_to root_path
+      render json: {status: 401}
+      # redirect_to root_path
     end
   end
 end
