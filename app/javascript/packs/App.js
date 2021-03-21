@@ -124,7 +124,7 @@ export default function App() {
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  if (!isUserSignedIn) {
+  if (!currentUser) {
     return <Login />;
   }
 

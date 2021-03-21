@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  # devise_for :users
+  
   get "api/get_user", to: 'api/sessions#get_user'
-  # get "users/sign_out", to: 'users/sessions#destroy'
+  post "api/log_in", to: 'api/sessions#log_in'
+  
 
   namespace :api do
     resources :customers

@@ -7,8 +7,9 @@ function NpaContextProvider(props) {
   const [currentUser, setCurrentUser] = useState(null);
   const [isUserSignedIn, setIsUserSignedIn] = useState();
   const [isCustomersLoaded, setIsCustomersLoaded] = useState(false);
-
-  console.log(currentUser);
+  const [loginCredentials, setLoginCredentials] = useState({ user: {} });
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     fetch("/api/get_user")
@@ -17,6 +18,7 @@ function NpaContextProvider(props) {
       })
       .then((response) => {
         setCurrentUser(response);
+        setFormSubmitted(false);
 
         if (response) {
           setIsUserSignedIn(true);
@@ -39,12 +41,14 @@ function NpaContextProvider(props) {
 
   const handleSignOut = () => {
     const csrfToken = document.getElementsByName("csrf-token")[0].content;
+
     fetch("/users/sign_out", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         "X-csrf-token": csrfToken,
       },
+      credentials: "same-origin",
     })
       .then((response) => {
         return response;
@@ -55,6 +59,42 @@ function NpaContextProvider(props) {
       });
   };
 
+  const handleChangeLoginForm = (event) => {
+    setLoginCredentials((prevLoginCredentials) => {
+      return {
+        ...prevLoginCredentials,
+        user: {
+          ...prevLoginCredentials.user,
+          [event.target.name]: event.target.value,
+        },
+      };
+    });
+  };
+
+  const handleSubmitLoginForm = (event) => {
+    event.preventDefault();
+    const csrfToken = document.getElementsByName("csrf-token")[0].content;
+    fetch("/api/log_in", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-csrf-token": csrfToken,
+      },
+      body: JSON.stringify(loginCredentials),
+      credentials: "same-origin",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        if (response) {
+          setCurrentUser(response);
+        } else {
+          setErrorMessage("Invalid login credentials!");
+        }
+      });
+  };
+
   return (
     <NpaContext.Provider
       value={{
@@ -62,6 +102,10 @@ function NpaContextProvider(props) {
         isUserSignedIn: isUserSignedIn,
         currentUser: currentUser,
         handleSignOut: handleSignOut,
+        loginCredentials: loginCredentials,
+        handleChangeLoginForm: handleChangeLoginForm,
+        handleSubmitLoginForm: handleSubmitLoginForm,
+        errorMessage: errorMessage,
       }}
     >
       {props.children}
