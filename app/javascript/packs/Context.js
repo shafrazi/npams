@@ -8,7 +8,7 @@ function NpaContextProvider(props) {
   const [isUserSignedIn, setIsUserSignedIn] = useState();
   const [isCustomersLoaded, setIsCustomersLoaded] = useState(false);
   const [loginCredentials, setLoginCredentials] = useState({ user: {} });
-  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -18,7 +18,6 @@ function NpaContextProvider(props) {
       })
       .then((response) => {
         setCurrentUser(response);
-        setFormSubmitted(false);
 
         if (response) {
           setIsUserSignedIn(true);
