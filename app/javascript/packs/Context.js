@@ -5,11 +5,11 @@ const NpaContext = React.createContext(null);
 function NpaContextProvider(props) {
   const [customers, setCustomers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
-  const [isUserSignedIn, setIsUserSignedIn] = useState();
+  // const [isUserSignedIn, setIsUserSignedIn] = useState();
   const [isCustomersLoaded, setIsCustomersLoaded] = useState(false);
-  const [loginCredentials, setLoginCredentials] = useState({ user: {} });
+  // const [loginCredentials, setLoginCredentials] = useState({ user: {} });
 
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
 
   // useEffect(() => {
   //   fetch("/api/get_user")
