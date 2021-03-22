@@ -7,9 +7,12 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
-    <%= javascript_pack_tag 'index' %>
   </head>
   <body>
+    <% if controller_name == "sessions" || controller_name == "passwords" || controller_name == "registrations"%>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

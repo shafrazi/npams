@@ -11,21 +11,21 @@ function NpaContextProvider(props) {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {
-    fetch("/api/get_user")
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        setCurrentUser(response);
+  // useEffect(() => {
+  //   fetch("/api/get_user")
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((response) => {
+  //       setCurrentUser(response);
 
-        if (response) {
-          setIsUserSignedIn(true);
-        } else {
-          setIsUserSignedIn(false);
-        }
-      });
-  }, []);
+  //       if (response) {
+  //         setIsUserSignedIn(true);
+  //       } else {
+  //         setIsUserSignedIn(false);
+  //       }
+  //     });
+  // }, []);
 
   useEffect(() => {
     fetch("/api/customers")
@@ -55,6 +55,7 @@ function NpaContextProvider(props) {
       .then((response) => {
         setIsUserSignedIn(false);
         setCurrentUser(null);
+        window.location.href = "/";
       });
   };
 

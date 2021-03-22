@@ -124,9 +124,9 @@ export default function App() {
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  if (!currentUser) {
-    return <Login />;
-  }
+  // if (!currentUser) {
+  //   return <Login />;
+  // }
 
   return (
     <div className={classes.root}>
