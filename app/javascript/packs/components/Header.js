@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import clsx from "clsx";
 import AppBar from "@material-ui/core/AppBar";
 import MenuIcon from "@material-ui/icons/Menu";
+import Button from "@material-ui/core/Button";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import {
   makeStyles,
@@ -10,6 +11,8 @@ import {
   IconButton,
   Badge,
 } from "@material-ui/core";
+
+import { NpaContext } from "../Context";
 
 const drawerWidth = 240;
 
@@ -54,6 +57,7 @@ const useStyles = makeStyles((theme) => {
 
 function Header(props) {
   const classes = useStyles();
+  const { handleClickAddCustomer } = useContext(NpaContext);
   const { open, handleDrawerOpen } = props;
   return (
     <div>
@@ -83,6 +87,13 @@ function Header(props) {
           >
             NPA monitoring system
           </Typography>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={handleClickAddCustomer}
+          >
+            Add customer
+          </Button>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />

@@ -9,10 +9,18 @@
     <%= javascript_pack_tag 'application' %>
   </head>
   <body>
-    <% if controller_name == "sessions" || controller_name == "passwords" || controller_name == "registrations"%>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    <% end %>
-    <%= yield %>
+    <div class="container-fluid">
+      <% if controller_name == "sessions" || controller_name == "passwords" || controller_name == "registrations"%>
+        <div class="notifications">
+          <% if notice %>
+            <p class="alert alert-success text-center"><%= notice %></p>
+          <% end %>
+          <% if alert %>
+            <p class="alert alert-danger text-center"><%= alert %></p>
+          <% end %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -16,6 +16,8 @@ import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import Customers from "./components/Customers";
 import Login from "./components/Login";
+import Modal from "./components/Modal";
+import Customer from "./components/Customer";
 
 function Copyright() {
   return (
@@ -113,7 +115,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function App() {
-  const { isUserSignedIn, currentUser } = useContext(NpaContext);
+  const {
+    isUserSignedIn,
+    currentUser,
+    ChildComponent,
+    modalTitle,
+  } = useContext(NpaContext);
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -124,9 +131,7 @@ export default function App() {
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  // if (!currentUser) {
-  //   return <Login />;
-  // }
+  // console.log(ChildComponent);
 
   return (
     <div className={classes.root}>
@@ -140,10 +145,14 @@ export default function App() {
             <Route exact path={"/customers"}>
               <Customers />
             </Route>
+            <Route exact path="/customers/:id">
+              <Customer />
+            </Route>
           </Switch>
           <Box pt={4}>
             <Copyright />
           </Box>
+          <Modal childComponent={ChildComponent} modalTitle={modalTitle} />
         </Container>
       </main>
     </div>
