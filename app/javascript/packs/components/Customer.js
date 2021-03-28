@@ -3,7 +3,18 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import Title from "./Title";
-import { Card, CardContent, makeStyles, TextField } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  makeStyles,
+  TextField,
+  Table,
+  TableRow,
+  TableCell,
+  TableHead,
+  TableBody,
+  Button,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -18,25 +29,44 @@ const useStyles = makeStyles((theme) => {
 function Customer() {
   const { id } = useParams();
   const [customerData, setCustomerData] = useState(null);
+  const [dataChanged, setDataChanged] = useState(false);
   const [error, setError] = useState(null);
+  const [correspondences, setCorrespondences] = useState([]);
   const classes = useStyles();
+
+  axios.defaults.headers.common["X-CSRF-TOKEN"] = document.getElementsByName(
+    "csrf-token"
+  )[0].content;
 
   useEffect(() => {
     axios
       .get(`/api/customers/${id}`)
       .then((response) => {
         setCustomerData(response.data.data);
+        setCorrespondences(response.data.data.attributes.correspondences);
+        setDataChanged(false);
       })
       .catch((error) => {
         setError("Customer not found.");
       });
-  }, []);
+  }, [dataChanged]);
+
+  const deleteCorrespondence = (correspondence) => {
+    axios
+      .delete(`/api/correspondences/${correspondence.id}`)
+      .then((response) => {
+        setDataChanged(true);
+      })
+      .catch((error) => {
+        setError("Error. The operation was not successful.");
+      });
+  };
 
   return (
     <div>
-      <Title>Customer Details</Title>
       <Card>
         <CardContent>
+          <Title>Customer Details</Title>
           {customerData ? (
             <form className={classes.root}>
               <div>
@@ -74,6 +104,44 @@ function Customer() {
             </form>
           ) : (
             error
+          )}
+
+          {correspondences.length > 0 && (
+            <div>
+              <Title>Correspondence history</Title>
+              <Table size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Title</TableCell>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Remarks</TableCell>
+                    <TableCell></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {correspondences.map((correspondence) => (
+                    <TableRow key={correspondence.id}>
+                      <TableCell>{correspondence.title}</TableCell>
+                      <TableCell>{correspondence.date}</TableCell>
+                      <TableCell>{correspondence.remarks}</TableCell>
+
+                      <TableCell>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          size="small"
+                          onClick={() => {
+                            deleteCorrespondence(correspondence);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           )}
         </CardContent>
       </Card>

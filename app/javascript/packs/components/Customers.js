@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -46,10 +46,16 @@ export default function Customers(props) {
     setPage(0);
   };
 
+  const convertClassName = (string) => {
+    const newString = string.toLowerCase().split(" ").join("-");
+    return newString;
+  };
+
   const {
     isCustomersLoaded,
     queryResults,
     handleClickEditCustomer,
+    handleClickAddCorrespondence,
   } = useContext(NpaContext);
 
   return (
@@ -107,7 +113,13 @@ export default function Customers(props) {
                         {customer.attributes.uid}
                       </Link>
                     </TableCell>
-                    <TableCell>{customer.attributes.status}</TableCell>
+                    <TableCell>
+                      <span
+                        className={convertClassName(customer.attributes.status)}
+                      >
+                        {customer.attributes.status}
+                      </span>
+                    </TableCell>
                     <TableCell>
                       <Button
                         variant="contained"
@@ -122,14 +134,13 @@ export default function Customers(props) {
                     </TableCell>
                     <TableCell>
                       <Button
-                        variant="outlined"
-                        color="primary"
+                        variant="contained"
                         size="small"
                         onClick={() => {
-                          handleClickOpenRenewalModal(customer);
+                          handleClickAddCorrespondence(customer);
                         }}
                       >
-                        Renew
+                        Add correspondence
                       </Button>
                     </TableCell>
                   </TableRow>

@@ -5,7 +5,7 @@ class Api::CustomersController < ApplicationController
   def index 
     if user_signed_in?
       @customers = Customer.all
-      render json: CustomerSerializer.new(@customers).serializable_hash
+      render json: CustomerSerializer.new(@customers, {fields: {customer: [:first_name, :last_name, :uid, :status]}}).serializable_hash
     else
       render json: {status: 401}
     end

@@ -77,3 +77,33 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.irregular {
+  background-color: #f2710b;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.past-due {
+  background-color: #e46e93;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.overdue-1-mo {
+  background-color: #fafa87;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.overdue-2-mo {
+  background-color: #f4ef06;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.regular {
+  background-color: #22d63d;
+  padding: 5px;
+  border-radius: 3px;
+}
