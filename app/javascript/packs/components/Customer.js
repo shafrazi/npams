@@ -115,6 +115,7 @@ function Customer() {
                     <TableCell>Title</TableCell>
                     <TableCell>Date</TableCell>
                     <TableCell>Remarks</TableCell>
+                    <TableCell>Added by</TableCell>
                     <TableCell></TableCell>
                   </TableRow>
                 </TableHead>
@@ -124,7 +125,7 @@ function Customer() {
                       <TableCell>{correspondence.title}</TableCell>
                       <TableCell>{correspondence.date}</TableCell>
                       <TableCell>{correspondence.remarks}</TableCell>
-
+                      <TableCell>{correspondence.username}</TableCell>
                       <TableCell>
                         <Button
                           variant="contained"

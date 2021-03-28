@@ -11,7 +11,7 @@ class Api::CorrespondencesController < ApplicationController
   end
 
   def create
-    @correspondence = Correspondence.new(correspondence_params)
+    @correspondence = current_user.correspondences.new(correspondence_params)
     if @correspondence.save
       render json: CorrespondenceSerializer.new(@correspondence).serializable_hash
     else
@@ -37,6 +37,6 @@ class Api::CorrespondencesController < ApplicationController
   private
 
   def correspondence_params
-    params.require(:correspondence).permit(:title, :date, :remarks, :customer_id)
+    params.require(:correspondence).permit(:title, :date, :remarks, :customer_id, :user_id)
   end
 end
