@@ -34,18 +34,18 @@ export const mainListItems = (
       <ListItemText primary="Customers" />
     </ListItem>
 
-    <ListItem button component={Link} to="/insurance_policies">
+    <ListItem button component={Link} to="/follow_ups">
       <ListItemIcon style={iconStyles}>
         <AssignmentTurnedInIcon />
       </ListItemIcon>
-      <ListItemText primary="Insurance policies" />
+      <ListItemText primary="Follow-ups" />
     </ListItem>
 
-    <ListItem button component={Link} to="/expired_policies">
+    <ListItem button component={Link} to="/overdue_follow_ups">
       <ListItemIcon style={iconStyles}>
         <EventBusyIcon />
       </ListItemIcon>
-      <ListItemText primary="Expired policies" />
+      <ListItemText primary="Overdue follow-ups" />
     </ListItem>
 
     <ListItem button>
@@ -53,38 +53,6 @@ export const mainListItems = (
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Reports" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon style={iconStyles}>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItem>
-  </div>
-);
-
-export const secondaryListItems = (
-  <div>
-    <ListSubheader style={iconStyles} inset>
-      Saved reports
-    </ListSubheader>
-    <ListItem button>
-      <ListItemIcon style={iconStyles}>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon style={iconStyles}>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon style={iconStyles}>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
     </ListItem>
   </div>
 );

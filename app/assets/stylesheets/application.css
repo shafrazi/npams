@@ -81,29 +81,39 @@ body {
 .irregular {
   background-color: #ff8c00;
   padding: 5px;
-  border-radius: 3px;
+  padding-right: 8px;
+  padding-left: 8px;
+  border-radius: 5px;
 }
 
 .past-due {
   background-color: #f73131;
   padding: 5px;
-  border-radius: 3px;
+  padding-right: 8px;
+  padding-left: 8px;
+  border-radius: 5px;
 }
 
 .overdue-1-mo {
   background-color: #fafa87;
   padding: 5px;
-  border-radius: 3px;
+  padding-right: 8px;
+  padding-left: 8px;
+  border-radius: 5px;
 }
 
 .overdue-2-mo {
   background-color: #f19775;
   padding: 5px;
-  border-radius: 3px;
+  padding-right: 8px;
+  padding-left: 8px;
+  border-radius: 5px;
 }
 
 .regular {
   background-color: #22d63d;
   padding: 5px;
-  border-radius: 3px;
+  padding-right: 8px;
+  padding-left: 8px;
+  border-radius: 5px;
 }

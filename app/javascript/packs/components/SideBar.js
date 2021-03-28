@@ -7,7 +7,7 @@ import {
   IconButton,
   Divider,
 } from "@material-ui/core";
-import { mainListItems, secondaryListItems } from "./listItems";
+import { mainListItems } from "./listItems";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ListItem from "@material-ui/core/ListItem";
@@ -87,7 +87,6 @@ function SideBar(props) {
         </ListItem>
       </List>
       <Divider style={{ color: "white" }} />
-      <List>{secondaryListItems}</List>
     </Drawer>
   );
 }

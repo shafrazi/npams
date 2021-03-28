@@ -56,6 +56,7 @@ export default function Customers(props) {
     queryResults,
     handleClickEditCustomer,
     handleClickAddCorrespondence,
+    handleClickAddFollowUp,
   } = useContext(NpaContext);
 
   return (
@@ -92,6 +93,7 @@ export default function Customers(props) {
                 <TableCell>Last name</TableCell>
                 <TableCell>UID</TableCell>
                 <TableCell>Status</TableCell>
+                <TableCell></TableCell>
                 <TableCell></TableCell>
                 <TableCell></TableCell>
               </TableRow>
@@ -141,6 +143,18 @@ export default function Customers(props) {
                         }}
                       >
                         Add correspondence
+                      </Button>
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        size="small"
+                        color="secondary"
+                        onClick={() => {
+                          handleClickAddFollowUp(customer);
+                        }}
+                      >
+                        Add follow-up
                       </Button>
                     </TableCell>
                   </TableRow>

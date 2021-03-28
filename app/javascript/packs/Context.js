@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AddCustomerForm from "./components/AddCustomerForm";
 import AddCorrespondenceForm from "./components/AddCorrespondenceForm";
+import AddFollowUpForm from "./components/AddFollowUpForm";
 
 const NpaContext = React.createContext(null);
 
@@ -125,6 +126,12 @@ function NpaContextProvider(props) {
     setModalTitle("Add correspondence");
   };
 
+  const handleClickAddFollowUp = (customer) => {
+    setOpenModal(true);
+    setChildComponent(<AddFollowUpForm customer={customer} />);
+    setModalTitle("Add follow-up");
+  };
+
   const handleSubmitCustomer = (event, action) => {
     event.preventDefault();
     let url;
@@ -191,6 +198,7 @@ function NpaContextProvider(props) {
         formAction: formAction,
         handleClickAddCorrespondence: handleClickAddCorrespondence,
         requestParams: requestParams,
+        handleClickAddFollowUp: handleClickAddFollowUp,
       }}
     >
       {props.children}
