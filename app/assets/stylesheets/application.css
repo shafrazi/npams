@@ -79,13 +79,13 @@ body {
 }
 
 .irregular {
-  background-color: #f2710b;
+  background-color: #ff8c00;
   padding: 5px;
   border-radius: 3px;
 }
 
 .past-due {
-  background-color: #e46e93;
+  background-color: #f73131;
   padding: 5px;
   border-radius: 3px;
 }
@@ -97,7 +97,7 @@ body {
 }
 
 .overdue-2-mo {
-  background-color: #f4ef06;
+  background-color: #f19775;
   padding: 5px;
   border-radius: 3px;
 }

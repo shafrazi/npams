@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :customers
     resources :correspondences
+    resources :follow_ups
   end
 
   root to: 'pages#index'
