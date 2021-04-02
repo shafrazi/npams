@@ -6,4 +6,8 @@ class FollowUp < ApplicationRecord
   def add_username
     self.username = self.user.username
   end
+
+  def customer_name
+    self.customer.first_name + " " + self.customer.last_name
+  end
 end

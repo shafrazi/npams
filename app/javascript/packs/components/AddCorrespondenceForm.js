@@ -9,6 +9,8 @@ import {
 import Title from "./Title";
 import axios from "axios";
 
+import { KeyboardDatePicker } from "@material-ui/pickers";
+
 const useStyles = makeStyles((theme) => {
   return {
     root: {
@@ -39,6 +41,15 @@ function AddCorrespondenceForm(props) {
     });
   };
 
+  const handleDateChange = (date) => {
+    setCorrespondence((prevCorrespondence) => {
+      return {
+        ...prevCorrespondence,
+        date: date,
+      };
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -63,12 +74,20 @@ function AddCorrespondenceForm(props) {
             variant="outlined"
             onChange={handleChange}
           />
-          <TextField
-            name="date"
+          <KeyboardDatePicker
+            autoOk
+            disableToolbar
+            variant="inline"
+            inputVariant="outlined"
+            format="yyyy-MM-dd"
+            margin="normal"
+            id="date"
             label="Date"
-            value={correspondence.date || ""}
-            variant="outlined"
-            onChange={handleChange}
+            value={correspondence.date || new Date()}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change date",
+            }}
           />
         </div>
         <div>

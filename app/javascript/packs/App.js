@@ -18,6 +18,7 @@ import Customers from "./components/Customers";
 import Login from "./components/Login";
 import Modal from "./components/Modal";
 import Customer from "./components/Customer";
+import Home from "./components/Home";
 
 function Copyright() {
   return (
@@ -131,8 +132,6 @@ export default function App() {
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  // console.log(ChildComponent);
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -142,6 +141,9 @@ export default function App() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
             <Route exact path={"/customers"}>
               <Customers />
             </Route>

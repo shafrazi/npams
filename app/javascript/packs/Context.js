@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import AddCustomerForm from "./components/AddCustomerForm";
 import AddCorrespondenceForm from "./components/AddCorrespondenceForm";
 import AddFollowUpForm from "./components/AddFollowUpForm";
@@ -7,6 +8,7 @@ const NpaContext = React.createContext(null);
 
 function NpaContextProvider(props) {
   const [customers, setCustomers] = useState([]);
+  const [followUps, setFollowUps] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [isUserSignedIn, setIsUserSignedIn] = useState();
   const [isCustomersLoaded, setIsCustomersLoaded] = useState(false);
@@ -45,6 +47,17 @@ function NpaContextProvider(props) {
         } else {
           setIsUserSignedIn(false);
         }
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("/api/follow_ups")
+      .then((response) => {
+        setFollowUps(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
