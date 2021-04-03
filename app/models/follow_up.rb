@@ -3,6 +3,7 @@ class FollowUp < ApplicationRecord
   belongs_to :customer
   belongs_to :user
 
+
   def add_username
     self.username = self.user.username
   end

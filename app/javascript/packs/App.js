@@ -139,7 +139,7 @@ export default function App() {
       <SideBar open={open} handleDrawerClose={handleDrawerClose} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
+        <Container maxWidth="xl" className={classes.container}>
           <Switch>
             <Route exact path="/">
               <Home />

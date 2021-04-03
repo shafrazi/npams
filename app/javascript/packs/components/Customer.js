@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+
+import { NpaContext } from "../Context";
 
 import Title from "./Title";
 import {
@@ -15,6 +17,7 @@ import {
   TableBody,
   Button,
   Grid,
+  Checkbox,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => {
@@ -34,7 +37,10 @@ function Customer() {
   const [error, setError] = useState(null);
   const [correspondences, setCorrespondences] = useState([]);
   const [followUps, setFollowUps] = useState([]);
+  const [followUp, setFollowUp] = useState(null);
   const classes = useStyles();
+
+  const { setIsFollowUpsChanged } = useContext(NpaContext);
 
   axios.defaults.headers.common["X-CSRF-TOKEN"] = document.getElementsByName(
     "csrf-token"
@@ -65,10 +71,37 @@ function Customer() {
       });
   };
 
+  const updateFollowUp = (event, followUp) => {
+    axios.defaults.headers.common["X-CSRF-TOKEN"] = document.getElementsByName(
+      "csrf-token"
+    )[0].content;
+
+    followUp.is_completed = event.target.checked;
+
+    axios
+      .patch(`/api/follow_ups/${followUp.id}`, followUp)
+      .then((response) => {
+        setFollowUps((prevFollowUps) => {
+          const updatedFollowUps = prevFollowUps.filter((item) => {
+            return item.id !== followUp.id;
+          });
+          return [...updatedFollowUps, followUp].sort((a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            return dateB - dateA;
+          });
+        });
+        setIsFollowUpsChanged(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <Grid container spacing={3}>
-        <Grid item md={6}>
+        <Grid item md={5}>
           <Card>
             <CardContent>
               <Title>Customer Details</Title>
@@ -152,7 +185,7 @@ function Customer() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item md={6}>
+        <Grid item md={7}>
           <Card>
             <CardContent>
               <Title>Follow ups</Title>
@@ -164,18 +197,27 @@ function Customer() {
                       <TableRow>
                         <TableCell>Description</TableCell>
                         <TableCell>Date</TableCell>
-
                         <TableCell>Added by</TableCell>
+                        <TableCell>Is completed?</TableCell>
                         <TableCell></TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {followUps.map((followUp) => (
-                        <TableRow key={followUp.id}>
-                          <TableCell>{followUp.description}</TableCell>
-                          <TableCell>{followUp.date}</TableCell>
-
-                          <TableCell>{followUp.username}</TableCell>
+                      {followUps.map((thisFollowUp) => (
+                        <TableRow key={thisFollowUp.id}>
+                          <TableCell>{thisFollowUp.description}</TableCell>
+                          <TableCell>{thisFollowUp.date}</TableCell>
+                          <TableCell>{thisFollowUp.username}</TableCell>
+                          <TableCell>
+                            <Checkbox
+                              checked={thisFollowUp.is_completed}
+                              color="primary"
+                              inputProps={{ "aria-label": "primary checkbox" }}
+                              onChange={(event) => {
+                                updateFollowUp(event, thisFollowUp);
+                              }}
+                            />
+                          </TableCell>
                           <TableCell>
                             <Button
                               variant="contained"

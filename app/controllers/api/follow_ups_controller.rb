@@ -2,7 +2,7 @@ class Api::FollowUpsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @follow_ups = FollowUp.all
+    @follow_ups = FollowUp.order(date: :desc)
     render json: FollowUpsSerializer.new(@follow_ups).serializable_hash
   end
 
@@ -37,6 +37,6 @@ class Api::FollowUpsController < ApplicationController
   private
 
   def follow_up_params
-    params.require(:follow_up).permit(:description, :date, :customer_id, :user_id)
+    params.require(:follow_up).permit(:description, :date, :customer_id, :user_id, :username, :is_completed, :id, :created_at, :updated_at)
   end
 end

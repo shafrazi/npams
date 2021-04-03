@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 
+import FollowUpsTable from "./FollowUpsTable";
+
 import { NpaContext } from "../Context";
 import "react-calendar/dist/Calendar.css";
 
@@ -9,8 +11,8 @@ function Home() {
 
   return (
     <div>
-      <h1>Home</h1>
       <Calendar value={date} onChange={setDate} />
+      <FollowUpsTable />
     </div>
   );
 }
