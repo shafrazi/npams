@@ -30,6 +30,7 @@ function AddFollowUpForm(props) {
   const { customer } = props;
   const [followUp, setFollowUp] = useState({
     customer_id: customer.id,
+    date: new Date(),
   });
 
   const handleDateChange = (date) => {

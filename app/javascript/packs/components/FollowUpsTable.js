@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useContext } from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Title from "./Title";
+
 import {
   Button,
   Paper,
@@ -18,7 +19,7 @@ import {
 
 import { Link } from "react-router-dom";
 
-import { NpaContext } from "../Context";
+// import { NpaContext } from "../Context";
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FollowUpsTable(props) {
+export default function FollowUpsTable({ followUps, isFollowUpsLoaded }) {
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(50);
@@ -46,8 +47,7 @@ export default function FollowUpsTable(props) {
     setPage(0);
   };
 
-  const { isFollowUpsLoaded, followUps } = useContext(NpaContext);
-  console.log(followUps);
+  // const { isFollowUpsLoaded, followUps } = useContext(NpaContext);
 
   return (
     <React.Fragment>
@@ -58,6 +58,7 @@ export default function FollowUpsTable(props) {
               <TableRow>
                 <TableCell>Description</TableCell>
                 <TableCell>Date</TableCell>
+                <TableCell>Customer</TableCell>
                 <TableCell>Added by</TableCell>
                 <TableCell>Status</TableCell>
               </TableRow>
@@ -74,6 +75,13 @@ export default function FollowUpsTable(props) {
                   <TableRow hover key={followUp.id}>
                     <TableCell>{followUp.attributes.description}</TableCell>
                     <TableCell>{followUp.attributes.date}</TableCell>
+                    <TableCell>
+                      <Link
+                        to={`/customers/${followUp.attributes.customer_id}`}
+                      >
+                        {followUp.attributes.customer_name}
+                      </Link>
+                    </TableCell>
                     <TableCell>{followUp.attributes.username}</TableCell>
                     <TableCell>
                       <Checkbox

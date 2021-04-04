@@ -9,6 +9,7 @@ const NpaContext = React.createContext(null);
 function NpaContextProvider(props) {
   const [customers, setCustomers] = useState([]);
   const [followUps, setFollowUps] = useState([]);
+  const [currentUserFollowUps, setCurrentUserFollowUps] = useState([]);
   const [isFollowUpsChanged, setIsFollowUpsChanged] = useState(false);
   const [isFollowUpsLoaded, setIsFollowUpsLoaded] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
@@ -23,6 +24,8 @@ function NpaContextProvider(props) {
   // const [loginCredentials, setLoginCredentials] = useState({ user: {} });
 
   // const [errorMessage, setErrorMessage] = useState("");
+
+  console.log(currentUserFollowUps);
 
   const requestParams = (method, data) => {
     return {
@@ -74,6 +77,15 @@ function NpaContextProvider(props) {
         setCustomers(response.data);
         setQueryResults(response.data);
         setIsCustomersLoaded(true);
+      });
+
+    axios
+      .get("api/current_user/follow_ups")
+      .then((response) => {
+        setCurrentUserFollowUps(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, [isUserSignedIn]);
 
@@ -219,6 +231,7 @@ function NpaContextProvider(props) {
         followUps: followUps,
         isFollowUpsLoaded: isFollowUpsLoaded,
         setIsFollowUpsChanged: setIsFollowUpsChanged,
+        currentUserFollowUps: currentUserFollowUps,
       }}
     >
       {props.children}

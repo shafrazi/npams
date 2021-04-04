@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :follow_ups
   end
 
+  get "api/current_user/follow_ups", to: 'api/follow_ups#current_user_follow_ups'
+
   root to: 'pages#index'
   # get "*path", to: 'pages#index', via: :all
 end

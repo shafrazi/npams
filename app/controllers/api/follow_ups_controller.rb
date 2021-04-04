@@ -34,6 +34,11 @@ class Api::FollowUpsController < ApplicationController
     @follow_up.destroy
   end
 
+  def current_user_follow_ups
+    @follow_ups = current_user.follow_ups
+    render json: FollowUpsSerializer.new(@follow_ups).serializable_hash
+  end
+
   private
 
   def follow_up_params

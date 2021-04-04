@@ -19,13 +19,14 @@ import Login from "./components/Login";
 import Modal from "./components/Modal";
 import Customer from "./components/Customer";
 import Home from "./components/Home";
+import FollowUpsTable from "./components/FollowUpsTable";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Insurance Monitoring System
+      <Link color="inherit" href="https://npams.herokuapp.com">
+        NPA Monitoring System
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -121,6 +122,8 @@ export default function App() {
     currentUser,
     ChildComponent,
     modalTitle,
+    followUps,
+    isFollowUpsLoaded,
   } = useContext(NpaContext);
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -149,6 +152,12 @@ export default function App() {
             </Route>
             <Route exact path="/customers/:id">
               <Customer />
+            </Route>
+            <Route exact path="/follow_ups">
+              <FollowUpsTable
+                followUps={followUps}
+                isFollowUpsLoaded={isFollowUpsLoaded}
+              />
             </Route>
           </Switch>
           <Box pt={4}>
