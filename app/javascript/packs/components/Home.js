@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => {
 
 function Home() {
   const [date, setDate] = useState(new Date());
-  // const [filterEnabled, setFilterEnabled] = useState(false);
   const { followUps, isFollowUpsLoaded } = useContext(NpaContext);
   const [queryResults, setQueryResults] = useState([]);
   const classes = useStyles();
