@@ -9,6 +9,7 @@ import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 import "bootstrap";
 import "./src/application.scss";
+import "react-calendar/dist/Calendar.css";
 
 Rails.start();
 // Turbolinks.start()
