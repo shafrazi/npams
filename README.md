@@ -1,24 +1,15 @@
-# README
+# NPA monitoring system
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Application to monitor and set reminders for non performing customers of financial institutions.
 
-Things you may want to cover:
+- Ruby version : 3.0
 
-* Ruby version
+- System dependencies : React, Postgresql, Material-UI
 
-* System dependencies
+- Deployment :
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+  $ cd ../npams
+  $ bundle install
+  $ rails db:create
+  $ rails db:migrate
+  $ rails start
