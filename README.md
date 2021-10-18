@@ -8,8 +8,10 @@ Application to monitor and set reminders for non performing customers of financi
 
 - Deployment :
 
+  ```
   $ cd ../npams
   $ bundle install
   $ rails db:create
   $ rails db:migrate
   $ rails start
+  ```
